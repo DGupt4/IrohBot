@@ -3,7 +3,7 @@ import miru
 import hikari
 
 from hikari import Intents
-from CONSTANTS import *
+from constants import *
 
 
 

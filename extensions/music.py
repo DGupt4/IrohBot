@@ -5,7 +5,7 @@ import lavasnek_rs
 import miru
 
 from miru.ext import nav
-from CONSTANTS import *
+from constants import *
 
 plugin = lightbulb.Plugin("music", include_datastore=True)
 plugin.add_checks(lightbulb.guild_only)
