@@ -18,7 +18,7 @@ class EventHandler:
         ids = plugin.bot.d.ids[event.guild_id]
 
         try:
-            await plugin.bot.rest.delete_message(id[0], id[1])
+            await plugin.bot.rest.delete_message(ids[0], ids[1])
         except:
             pass
 
@@ -73,11 +73,12 @@ class PlayerView(miru.View):
 
     @miru.button(emoji=EMOJI_NEXT, style=hikari.ButtonStyle.SUCCESS)
     async def next_button(self, button: miru.Button, ctx: miru.ViewContext) -> None:
-        skip = await plugin.bot.d.lavalink.skip(ctx.guild_id)
         node = await plugin.bot.d.lavalink.get_guild_node(ctx.guild_id)
 
-        if not skip or not node.queue:
+        if len(node.queue) <= 1:
             await ctx.respond(embed=_embed("There is nothing to skip to!"), flags=hikari.MessageFlag.EPHEMERAL)
+        else:
+            await plugin.bot.d.lavalink.skip(ctx.guild_id)
 
 def _embed(description=""):
     return hikari.Embed(description=description, color=EMBED_COLOR)
